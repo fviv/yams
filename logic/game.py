@@ -24,6 +24,9 @@ class Game:
                 return False
         return True
 
+    def add_player(self, player):
+        self.players.append(player)
+
     def choose_dices(self) -> None:
         i = 0
         while i < len(self.dices):
@@ -40,5 +43,4 @@ class Game:
             i += 1
             self.launch_dices()
             self.choose_dices
-        
-
+            player.score_sheet.get_possible_points(self.dices)
