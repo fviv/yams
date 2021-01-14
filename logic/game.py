@@ -40,5 +40,3 @@ class Game:
             i += 1
             self.launch_dices()
             self.choose_dices
-        
-
