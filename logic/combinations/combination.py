@@ -8,29 +8,31 @@ class Combination:
         self.used = False
         self.pattern = pattern
         self.points = points
+        self.points_gained_if_chosen = 0
 
     def check_if_valid(self, results) -> int:
 
         if self.used == True:
-            return 0
+            return
         if self.points == "sum":
-            return results.count(self.pattern)*int(self.pattern)
+            self.points_gained_if_chosen = results.count(
+                self.pattern)*int(self.pattern)
         elif self.points == "total":
             regex = re.compile(self.pattern)
             occurence = regex.findall(results)
             if len(occurence) == 0:
-                return 0
+                self.points_gained_if_chosen = 0
             else:
                 total = 0
                 if len(occurence[0]) != 1 and len(occurence[0]) != 5:
                     occurence[0] = occurence[0][0]
                 for char in occurence[0]:
                     total += int(char)
-                return total
+                self.points_gained_if_chosen = total
         else:
             regex = re.compile(self.pattern)
             occurence = regex.findall(results)
             if len(occurence) == 0:
-                return 0
+                self.points_gained_if_chosen = 0
             else:
-                return self.points
+                self.points_gained_if_chosen = self.points

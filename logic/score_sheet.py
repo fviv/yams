@@ -4,6 +4,9 @@ from logic.combinations.combinations_manager import CombinationsManager
 class ScoreSheet:
     def __init__(self) -> None:
         self.combinations_manager = CombinationsManager()
+        self.total_points = 0
+        self.intermediate_points = 0
+        self.intermediate_points_bonus_awarded = False
 
     def __sort_results(self, dices) -> list:
         results = []
@@ -22,8 +25,17 @@ class ScoreSheet:
                     results.append(dice.value)
         return results
 
-    def get_possible_points(self, dices):
+    def score_combination(self, combination):
+        if(combination.points == "sum"):
+            self.intermediate_points += combination.points_gained_if_chosen
+            self.total_points += combination.points_gained_if_chosen
+        if self.intermediate_points > 62 and not self.intermediate_points_bonus_awarded:
+            self.intermediate_points_bonus_awarded = True
+            self.total_points += 35
+        combination.used = True
+        return combination.points_gained_if_chosen
 
+    def get_possible_points(self, dices):
         results = ""
         for value in self.__sort_results(dices):
             results += str(value)

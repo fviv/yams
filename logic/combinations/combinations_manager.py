@@ -19,7 +19,5 @@ class CombinationsManager:
         return combinations
 
     def get_possible_points(self, results):
-        print(results)
         for combination in self.combinations:
-            print(combination.name+" : " +
-                  str(combination.check_if_valid(results))+" points")
+            combination.check_if_valid(results)
