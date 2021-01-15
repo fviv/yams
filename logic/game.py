@@ -47,3 +47,4 @@ class Game:
 
     def reset_game(self):
         self = Game(self.players)
+
